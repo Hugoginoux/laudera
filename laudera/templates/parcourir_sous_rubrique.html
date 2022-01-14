@@ -1,0 +1,13 @@
+{% extends "parcourir_rubrique.html" %}
+
+{% block titre %}Laudera: {{ sous_rubrique_ }}{% endblock %}
+{% block description %}Laudera, parcours de la sous-rubrique {{ sous_rubrique_ }}{% endblock %}
+{% block details %}
+	{% include "sous_rubriques.html" %}
+	<ul id="elements">
+		{% for element in elements_ %}
+			<li><a href="/?q={{ element.nom|urlencode }}">{{ element.nom }}</a></li>
+		{% endfor %}
+	</ul>	
+{% endblock %}
+

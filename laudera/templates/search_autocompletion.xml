@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+	{% for elt in elts_ %}
+		<element>
+			<nom>{{ elt.nom }}</nom>
+			<rub>
+				<nom>{{ elt.sous_rubrique.rubrique.nom }}</nom>
+				<url>{{ elt.sous_rubrique.rubrique.nom }}</url>
+			</rub>
+			<srub>
+				<nom>{{ elt.sous_rubrique.nom }}</nom>
+				<url>{{ elt.sous_rubrique.nom }}</url>
+			</srub>	
+		</element>
+	{% endfor %}
+</results>
+

@@ -1,0 +1,76 @@
+{% extends "parcourir_rubrique.html" %}
+
+{% block titre %}Laudera: à propos de {{ elements_.0.nom }}{% endblock %}
+{% block description %}Laudera, à propos de {{ elements_.0.nom }}{% endblock %}
+{% block details %}
+	{% for element in elements_ %}
+		{% with sous_rubriques_=element.get_sous_rubriques_attachees sous_rubrique_=element.sous_rubrique %}{% include "sous_rubriques.html" %}{% endwith %}
+		<div class="quick_links">
+			<div class="videos">
+				<h2>Vidéos</h2>
+				<ul>
+					{% for video in element.video_set.all %}
+						{% if forloop.counter <= 3 %}
+						{% if video.image %}
+							<a href="{{ video.url }}" title="{{ video.url }}" target="_blank"><img src="{{ video.image.path }}" alt="Vidéo n°{{ forloop.counter }}" /></a>
+						{% elif video.url_image %}
+							<a href="{{ video.url }}" title="{{ video.url }}" target="_blank"><img src="{{ video.url_image }}" alt="Vidéo n°{{ forloop.counter }}" /></a>
+						{% else %}
+							<a href="{{ video.url }}" title="{{ video.url }}" target="_blank"><img src="/media/img/video{% if "youtube" in video.url %}_youtube{% elif "dailymotion" in video.url %}_dailymotion{% endif %}.png" alt="Vidéo n°{{ forloop.counter }}" /></a>
+						{% endif %}
+						{% else %} - <a href="{{ video.url }}" title="{{ video.url }}" target="_blank">{{ forloop.counter }}</a>{% endif %}
+					{% empty %}
+						Aucune vidéo pour le moment
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="blogs">
+				<h2>Blogs</h2>
+				<ul>
+					{% for blog in element.blog_set.all %}
+						{% if forloop.counter <= 3 %}
+						{% if blog.image %}
+                                                        <a href="{{ blog.url }}" title="{{ blog.url }}" target="_blank"><img src="{{ blog.image.path }}" alt="Blog n°{{ forloop.counter }}" /></a>
+                                                {% elif blog.url_image %}
+                                                        <a href="{{ blog.url }}" title="{{ blog.url }}" target="_blank"><img src="{{ blog.url_image }}" alt="Blog n°{{ forloop.counter }}" /></a>
+                                                {% else %}
+							<a href="{{ blog.url }}" title="{{ blog.url }}" target="_blank"><img src="/media/img/blog.png" alt="Blog n°{{ forloop.counter }}" /></a>
+						{% endif %}
+						{% else %} - <a href="{{ blog.url }}" title="{{ blog.url }}" target="_blank">{{ forloop.counter }}</a>{% endif %}
+					{% empty %}
+						Aucun blog pour le moment
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div class="results">
+			<h2>Les résultats pour « {{ element.nom }} »</h2>
+			<ul>
+				{% for lien in element.lien_set.all %}
+					<li>
+						<div class="titre"><a href="{{ lien.url }}" target="_blank">{% if lien.titre %}{{ lien.titre }}{% else %}{{ lien.url }}{% endif %}</a></div>
+						<div class="description">{{ lien.description }}</div>
+						<div class="url">{{ lien.url }}</div>
+					</li>
+				{% empty %}
+					Aucun résultat pour le moment
+				{% endfor %}
+			</ul>
+			<div class="pagination">
+				<span class="step-links">
+					{% if elements_.has_previous %}
+						<a href="?page={{ elements_.previous_page_number }}">previous</a>
+					{% endif %}
+					<span class="current">
+						Page {{ elements_.number }} of {{ elements_.paginator.num_pages }}.
+					</span>
+					{% if elements_.has_next %}
+						<a href="?page={{ elements_.next_page_number }}">next</a>
+					{% endif %}
+				</span>
+			</div>
+			<br/>
+		</div>
+	{% endfor %}
+{% endblock %}
+

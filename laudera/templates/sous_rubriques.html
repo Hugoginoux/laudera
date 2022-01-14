@@ -1,0 +1,6 @@
+<div id="sous_rubriques">
+	{% for sous_rubrique in sous_rubriques_ %}
+		<a href="{% url searchengine.views.parcourir_sous_rubrique rubrique_nom=sous_rubrique.rubrique.nom sous_rubrique_nom=sous_rubrique.nom %}" class="sous_rubrique{% if sous_rubrique.id == sous_rubrique_.id %}_select{% endif %}">{{ sous_rubrique.nom }}</a>
+		{% if not forloop.last %} - {% endif %}
+	{% endfor %}
+</div>
