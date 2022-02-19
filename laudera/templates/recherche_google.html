@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% load static %}
-{% block extra_css %}<link rel="stylesheet" href="{% static "css/style_contenu.css" %}" />{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/style_contenu.css' %}" />{% endblock %}
 {% block titre %}Laudera: {{ rubrique_.nom }}{% endblock %}
 {% block description %}Laudera, parcours de la rubrique {{ rubrique_.nom }}{% endblock %}
 
 {% block contenu %}
-        <h1 class="topleft"><a href="{% url searchengine.views.accueil %}"><img src="/media/img/laudera.png" alt="Laudera" />Laudera</a></h1>
+        <h1 class="topleft"><a href="{% url 'searchengine.views.accueil' %}"><img src="{% static 'media/img/laudera.png' %}" alt="Laudera" />Laudera</a></h1>
         {% include "entete.html" %}
 	<p id="redirection">
 		Laudera ne contient aucune entrée relative à « {{ query_ }} »

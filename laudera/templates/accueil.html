@@ -5,7 +5,12 @@
 
 {% block contenu %}
 	<div id="page_accueil">
-		<h1 class="accueil"><a href="{% url searchengine.views.accueil %}"><img src="/media/img/laudera.png" alt="Laudera" />Laudera</a></h1>
+		<h1 class="accueil">
+			<a href="{% url 'searchengine.views.accueil' %}">
+				{% load static %}
+				<img src="{% static 'media/img/laudera.png' %}" alt="Laudera" />Laudera
+			</a>
+		</h1>
 		{% include "entete.html" %}
 	</div>
 {% endblock %}

@@ -97,7 +97,7 @@ def search_autocompletion_xml(request):
 	if request.method == "GET":
 		try:
 			query = request.GET["q"].split(" ")
-		except KeyError, e:
+		except KeyError as e:
 			pass
 	
 	# On applique les différents filtres
